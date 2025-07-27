@@ -1,0 +1,23 @@
+"""Цветовая схема для приложения Digital Fortress"""
+
+COLORS = {
+    "BG_COLOR": "#18181B",
+    "BG_GRADIENT_TOP": "#23232A",
+    "BG_GRADIENT_BOTTOM": "#18181B",
+    "PANEL_COLOR": "#23232A",
+    "PANEL_ALT_COLOR": "#34344A",
+    "PANEL_LIGHT_COLOR": "#48486A",
+    "SEPARATOR_COLOR": "#48486A",
+    "ACCENT_COLOR": "#0f7fd6",
+    "ACCENT_HOVER_COLOR": "#0478d1",
+    "TEXT_COLOR": "#F8F8FF",
+    "TEXT_SECONDARY_COLOR": "#A0A0B0",
+    "BORDER_COLOR": "#48486A",
+    "WARNING_COLOR": "#FFB300",
+    "ERROR_COLOR": "#FF4B4B",
+    "SUCCESS_COLOR": "#13785c",
+    "BUTTON_COLOR": "#34344A",
+    "INPUT_BG_COLOR": "#23232A",
+    "SELECTION_COLOR": "#34344A",
+    "SHADOW_COLOR": "#00000040"
+}
