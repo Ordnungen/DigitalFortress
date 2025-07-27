@@ -104,7 +104,7 @@ class ToastMixin:
         if self._is_initialized:
             return
 
-        # Попытаться найти элементы формы для уведомлений
+        # Попытать найти элементы формы для уведомлений
         form_title = getattr(self, 'form_title', None)
         form_header = getattr(self, 'form_header_frame', None)
 
@@ -140,6 +140,23 @@ class ToastMixin:
         else:
             # Fallback - показать как предупреждение
             self.show_warning(message)
+
+    def _destroy_notification_frame(self, frame_key: str):
+        """Уничтожить фрейм уведомления по ключу"""
+        # Отменить таймер
+        self._cancel_timer(frame_key)
+
+        # Уничтожить фрейм если он существует
+        if frame_key in self._notification_frames:
+            try:
+                frame = self._notification_frames[frame_key]
+                if frame and hasattr(frame, 'winfo_exists'):
+                    if frame.winfo_exists():
+                        frame.destroy()
+                del self._notification_frames[frame_key]
+            except Exception:
+                # Игнорируем ошибки при уничтожении
+                pass
 
     def show_warning(self, message: str):
         """Показать предупреждение с улучшенным управлением ресурсами"""
@@ -375,15 +392,7 @@ class ToastMixin:
 
             # Уничтожить все фреймы
             for frame_key in list(self._notification_frames.keys()):
-                try:
-                    if frame_key in self._notification_frames:
-                        frame = self._notification_frames[frame_key]
-                        if frame and hasattr(frame, 'winfo_exists'):
-                            if frame.winfo_exists():
-                                frame.destroy()
-                        del self._notification_frames[frame_key]
-                except Exception:
-                    pass
+                self._destroy_notification_frame(frame_key)
 
             # Скрыть уведомление в заголовке
             if self._notification_display:
